@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        header {
+            background: blue;
+            padding: 15px;
+        }
+        .main {
+            width: 30%;
+            margin: 10px auto;
+            padding: 10px;
+            border: 1px solid black;
+        }
+        .head {
+            width:250px;
+            margin: 0 auto;
+        }
+        input {
+            width: 180px;
+            height: 30px;
+        }
+        button {
+            width: 50px;
+            height: 30px;
+        }
+        li {
+            overflow: hidden;
+            margin-top: 10px;
+        }
+        a {
+            border: 1px solid black;
+            float: right;
+            margin-right: 20px;
+            padding: 3px;
+            text-decoration: none;
+            border-radius: 5px;
+
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Todo List App</h1>
+    </header>
+    <div class="main">
+    <div class="head">
+    <form action="/" method="post">
+        {% csrf_token %}
+        {{form.content}}
+
+        <button type="submit">Add</button>
+    </form>
+    </div>
+    <ul style="list-style-type: none;text-align: left;">
+        {% for todo_item in all_item %}
+            <li>{{ todo_item }} 
+                <a href="{% url 'delete' todo_item.id %}">Delete</a>
+                <a href="{% url 'update' todo_item.id %}">Update</a>
+        {% endfor %}
+    </ul>
+
+    </div>
+</body>
+</html>
